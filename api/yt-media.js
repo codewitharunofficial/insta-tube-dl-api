@@ -40,8 +40,6 @@ export default async function handler(req, res) {
 
         const videoId = extractYouTubeId(url);
 
-        console.log(videoId);
-
         const options = {
             method: 'GET',
             url: process.env.YT_API_URL,
@@ -61,13 +59,16 @@ export default async function handler(req, res) {
             return res.status(404).json({ error: 'Media not found in response' });
         }
 
-        // console.log(data.adaptiveFormats)
-
-        // const media = getWorkingVideoFormats(data.formats || data.adaptiveFormats || []);
         const media = data.formats || [];
 
         // console.log(media)
-        return res.status(200).json({ success: true, media });
+        return res.status(200).json({
+            success: true, data: {
+                title: data.title || 'YouTube Video',
+                thumbnail: data.thumbnail[data.thumbnail.length - 1].url || '',
+                media: media
+            }
+        });
 
     } catch (error) {
         console.error('Download error:', error.message);

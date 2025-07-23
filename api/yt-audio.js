@@ -47,7 +47,13 @@ export default async function handler(req, res) {
         const media = data.adaptiveFormats?.find(format => format.itag === 140) || [];
 
         // console.log(media)
-        return res.status(200).json({ success: true, media });
+        return res.status(200).json({
+            success: true, data: {
+                title: data.title || 'YouTube Video',
+                thumbnail: data.thumbnail[data.thumbnail.length - 1].url || '',
+                media: media
+            }
+        });
 
     } catch (error) {
         console.error('Download error:', error.message);

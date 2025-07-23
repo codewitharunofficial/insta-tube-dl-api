@@ -30,8 +30,14 @@ export default async function handler(req, res) {
 
         const media = data.data.video_url;
 
-        console.log(media)
-        return res.status(200).json({ success: true, media });
+        // console.log(media)
+        return res.status(200).json({
+            success: true, data: {
+                title: data.data.caption.text || 'Instagram Video',
+                thumbnail: data.data.image_versions.items[0].url || '',
+                media: media,
+            }
+        });
 
     } catch (error) {
         console.error('Download error:', error.message);
