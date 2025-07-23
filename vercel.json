@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/download/insta-media",
+      "dest": "/api/insta-media.js"
+    },
+    {
+      "src": "/api/download/yt-media",
+      "dest": "/api/yt-media.js"
+    },
+    {
+      "src": "/api/download/yt-audio",
+      "dest": "/api/yt-audio.js"
+    }
+  ]
+}
