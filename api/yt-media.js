@@ -61,6 +61,10 @@ export default async function handler(req, res) {
 
         const media = data.formats || [];
 
+        res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with specific origin in production
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
         // console.log(media)
         return res.status(200).json({
             success: true, data: {

@@ -46,6 +46,10 @@ export default async function handler(req, res) {
         // const media = getWorkingVideoFormats(data.formats || data.adaptiveFormats || []);
         const media = data.adaptiveFormats?.find(format => format.itag === 140) || [];
 
+        res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with specific origin in production
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
         // console.log(media)
         return res.status(200).json({
             success: true, data: {
